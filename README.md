@@ -71,11 +71,11 @@ Magic Mirror설치 또는 자체적으로 windows or 안드로이드 app 제작.
 
    외에도 크롤링 등 여러가지 방법을 고려할 수 있다.
 
-3. 급식 정보 (선택, 학교에서 사용 시)
+3. **급식 정보 (선택, 학교에서 사용 시) [완료]**
 
    2018년 변태가 만든 급식 api를 이용하여 실시간 급식정보를 받아온다.
-
    https://github.com/apple01644/PublicScreen
+   dgsw.hs.kr이 접속되지 않는곳이 환경을 대비해 Open NEIS API를 사용하였다.
 
 4. 뉴스 정보
    Naverdevelopers 에서 제공하는 openapi 뉴스를 받아와 사용한다.
