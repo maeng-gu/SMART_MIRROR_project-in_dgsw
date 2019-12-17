@@ -3,5 +3,11 @@
 		"ATPT_OFCDC_SC_CODE" : "D10",
 		"SD_SCHUL_CODE" : "7240393",
 		"KEY" : "17343cb939104879acff6cc41b8b7636"
+	},
+	"KMA-Weather-Api" : {
+		"ZoneID" : "2771038000"
+	},
+	"Slack-Api" : {
+		"BotOAuthToken" : "xoxb-849581889920-849264423684-R20cVBGiWVnBsL1H19EX6LDC"
 	}
 }
