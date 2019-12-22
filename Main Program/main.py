@@ -724,7 +724,7 @@ SHOWS[6] = WatchShow(WND_W, WND_H)
 
 class ManagerShow(Show.Show):
     show_name = 'Manager show'
-    period = datetime.timedelta(hours=0, minutes=0, seconds=15)
+    period = datetime.timedelta(hours=0, minutes=0, seconds=3)
     mutex = mutex
     img = {}
     num_of_show = len(SHOWS)
