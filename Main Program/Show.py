@@ -4,7 +4,7 @@ class Show(Module.Module):
     module_name = 'Show'
     show_name = 'default'
 
-    isDied = False
+    isPause = False
     isEmpty = True
     flagQuit = False
     err_refresh = ''
@@ -31,8 +31,8 @@ class Show(Module.Module):
             self.mutex.release()
             self.isDied = True
 
-    def isFresh(self):
-        return True
+    #def isFresh(self):
+    #    return True
     
     def Refresh(self):
         try:
@@ -46,14 +46,7 @@ class Show(Module.Module):
             return self.W * n / 100
         def h(n):
             return self.H * n / 100
-        return self.surf
-
-    def Loop(self):
-        while not self.flagQuit:
-            if not self.isFresh():
-                self.Refresh()
-                time.sleep(1)
-                
+        return self.surf      
 
     def isFresh(self):
         now = datetime.datetime.now()
@@ -64,18 +57,19 @@ class Show(Module.Module):
         return True
     
     def Loop(self):
-        while not self.flagQuit:
-            if not self.isFresh():
-                try:
-                    self.Refresh()
-                    self.mutex.acquire()
-                    print('%s %s is Refresh'%(str(datetime.datetime.now()), self.show_name))
-                    self.mutex.release()
-                    time.sleep(self.period.seconds)
-                except Exception as e:
-                    self.mutex.acquire()
-                    print('%s %s is Failed to Refresh %s'%(str(datetime.datetime.now()), self.show_name, str(e)))
-                    self.mutex.release()
+        #while not self.flagQuit:
+        #while self.isPause: time.sleep(0.5)
+        if not self.isFresh():
+            try:
+                self.Refresh()
+                #self.mutex.acquire()
+                #print('%s %s is Refresh'%(str(datetime.datetime.now()), self.show_name))
+                #self.mutex.release()
+                time.sleep(self.period.seconds)
+            except Exception as e:
+                self.mutex.acquire()
+                print('%s %s is Failed to Refresh %s'%(str(datetime.datetime.now()), self.show_name, str(e)))
+                self.mutex.release()
                 
     
 print('Library, Show is Loaded')

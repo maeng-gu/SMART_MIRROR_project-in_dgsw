@@ -1,10 +1,10 @@
-import pygame, datetime, time, math
+import pygame, datetime, time, math, sys
 import pygame.locals
 import requests, json, io, threading
 import Module
 import MealInfo, ClassInfo, EventInfo, Weather, Show, Naver
 
-data = io.open('config.json', mode='r', encoding='utf-8').read()
+data = io.open(sys.path[0] + '/config.json', mode='r', encoding='utf-8').read()
 conf = json.loads(data)
 
 mod_mealinfo = MealInfo.MealInfo(
@@ -44,25 +44,25 @@ class WeatherShow(Show.Show):
         def h(n):
             return self.H * n / 100
         self.fontH = self.H // 16
-        self.font = pygame.font.Font('NanumSquare_acB.ttf', self.fontH)
+        self.font = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontH)
     
-        self.img['clear_day'] = pygame.image.load("weather/clear_day.jpg")
-        self.img['clear_night'] = pygame.image.load("weather/clear_night.jpg")
-        self.img['cloud'] = pygame.image.load("weather/cloud.jpg")
-        self.img['cloud_day'] = pygame.image.load("weather/cloud_day.jpg")
-        self.img['cloud_night'] = pygame.image.load("weather/cloud_night.jpg")
-        self.img['rainy_cloud'] = pygame.image.load("weather/rainy_cloud.jpg")
-        self.img['rainy_day'] = pygame.image.load("weather/rainy_day.jpg")
-        self.img['rainy_night'] = pygame.image.load("weather/rainy_night.jpg")
-        self.img['snow_cloud'] = pygame.image.load("weather/snow_cloud.jpg")
-        self.img['snow_day'] = pygame.image.load("weather/snow_day.jpg")
-        self.img['snow_night'] = pygame.image.load("weather/snow_night.jpg")
-        self.img['sonagi_cloud'] = pygame.image.load("weather/sonagi_cloud.jpg")
-        self.img['sonagi_day'] = pygame.image.load("weather/sonagi_day.jpg")
-        self.img['sonagi_night'] = pygame.image.load("weather/sonagi_night.jpg")
-        self.img['windy_cloud'] = pygame.image.load("weather/windy_cloud.jpg")
-        self.img['windy_day'] = pygame.image.load("weather/windy_day.jpg")
-        self.img['windy_night'] = pygame.image.load("weather/windy_night.jpg")
+        self.img['clear_day'] = pygame.image.load(sys.path[0]+"/weather/clear_day.jpg")
+        self.img['clear_night'] = pygame.image.load(sys.path[0]+"/weather/clear_night.jpg")
+        self.img['cloud'] = pygame.image.load(sys.path[0]+"/weather/cloud.jpg")
+        self.img['cloud_day'] = pygame.image.load(sys.path[0]+"/weather/cloud_day.jpg")
+        self.img['cloud_night'] = pygame.image.load(sys.path[0]+"/weather/cloud_night.jpg")
+        self.img['rainy_cloud'] = pygame.image.load(sys.path[0]+"/weather/rainy_cloud.jpg")
+        self.img['rainy_day'] = pygame.image.load(sys.path[0]+"/weather/rainy_day.jpg")
+        self.img['rainy_night'] = pygame.image.load(sys.path[0]+"/weather/rainy_night.jpg")
+        self.img['snow_cloud'] = pygame.image.load(sys.path[0]+"/weather/snow_cloud.jpg")
+        self.img['snow_day'] = pygame.image.load(sys.path[0]+"/weather/snow_day.jpg")
+        self.img['snow_night'] = pygame.image.load(sys.path[0]+"/weather/snow_night.jpg")
+        self.img['sonagi_cloud'] = pygame.image.load(sys.path[0]+"/weather/sonagi_cloud.jpg")
+        self.img['sonagi_day'] = pygame.image.load(sys.path[0]+"/weather/sonagi_day.jpg")
+        self.img['sonagi_night'] = pygame.image.load(sys.path[0]+"/weather/sonagi_night.jpg")
+        self.img['windy_cloud'] = pygame.image.load(sys.path[0]+"/weather/windy_cloud.jpg")
+        self.img['windy_day'] = pygame.image.load(sys.path[0]+"/weather/windy_day.jpg")
+        self.img['windy_night'] = pygame.image.load(sys.path[0]+"/weather/windy_night.jpg")
 
         for key in self.img.keys():
             self.img[key] = pygame.transform.scale(self.img[key], (int(w(70)), int(w(70))))
@@ -109,7 +109,7 @@ class WeatherShow(Show.Show):
                         target = 'clear_night'
                     elif sky == 4:
                         target = 'cloud'
-            elif pty == 1 or ptr == 2:
+            elif pty == 1 or pty == 2:
                 if sky == 1 or sky == 2:
                     target = 'rainy_day' if day else 'rainy_night'
                 elif sky == 4:
@@ -168,9 +168,9 @@ class MealShow(Show.Show):
             return self.H * n / 100
 
         self.fontH = self.H // 20
-        self.font = pygame.font.Font('NanumSquare_acB.ttf', self.fontH)
+        self.font = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontH)
         self.fontBigH = self.H // 15
-        self.fontBig = pygame.font.Font('NanumSquare_acB.ttf', self.fontBigH)
+        self.fontBig = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontBigH)
     
     def Render(self, dt):
         def w(n):
@@ -245,11 +245,11 @@ class EventShow(Show.Show):
             return self.H * n / 100
 
         self.fontTitleH = self.H // 20
-        self.fontTitle = pygame.font.Font('NanumSquare_acB.ttf', self.fontTitleH)
+        self.fontTitle = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontTitleH)
         self.fontDayH = int(self.W * 0.6)
-        self.fontDay = pygame.font.Font('NanumSquare_acB.ttf', self.fontDayH)
+        self.fontDay = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontDayH)
         self.fontListH = self.H // 30
-        self.fontList = pygame.font.Font('NanumSquare_acB.ttf', self.fontListH)
+        self.fontList = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontListH)
 
         self.wd2text = ['월','화','수','목','금','토','일']
         self.dweek = ['다음주']
@@ -332,10 +332,10 @@ class TimeTableShow(Show.Show):
             return self.H * n / 100
 
         self.fontTitleH = self.H // 18
-        self.fontTitle = pygame.font.Font('NanumSquare_acB.ttf', self.fontTitleH)
+        self.fontTitle = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontTitleH)
         
-        self.fontListH = self.H // 25
-        self.fontList = pygame.font.Font('NanumSquare_acB.ttf', self.fontListH)
+        self.fontListH = self.H // 35
+        self.fontList = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontListH)
         self.wd2text = ['월','화','수','목','금','토','일']
     def Render(self, dt):
         def w(n):
@@ -382,7 +382,7 @@ class TimeTableShow(Show.Show):
 
 class ClockShow(Show.Show):
     show_name = 'Clock show'
-    period = datetime.timedelta(hours=0, minutes=0, seconds=30)
+    period = datetime.timedelta(hours=0, minutes=0, seconds=31)
     img = {}
     times = []
     data = ''
@@ -399,13 +399,13 @@ class ClockShow(Show.Show):
             return self.H * n / 100
 
         self.fontTitleH = self.H // 10
-        self.fontTitle = pygame.font.Font('NanumSquare_acB.ttf', self.fontTitleH)
+        self.fontTitle = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontTitleH)
         self.fontLefttimeH = self.H // 18
-        self.fontLefttime = pygame.font.Font('NanumSquare_acB.ttf', self.fontLefttimeH)
+        self.fontLefttime = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontLefttimeH)
         self.fontNextH = self.H // 23
-        self.fontNext = pygame.font.Font('NanumSquare_acB.ttf', self.fontNextH)
+        self.fontNext = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontNextH)
         self.fontClockH = self.H // 6
-        self.fontClock = pygame.font.Font('NanumSquare_acB.ttf', self.fontClockH)
+        self.fontClock = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontClockH)
 
         self.add_time(6,20,'기상',tag='{평일}{아침}')
         self.add_time(6,30,"아침점호",tag='{평일}{아침}')
@@ -545,10 +545,8 @@ class NaverShow(Show.Show):
     period = datetime.timedelta(hours=1, minutes=30)
     img = {}
     naver = mod_naver
-    target_grade = 2
-    target_class = 3
     mutex = mutex
-
+    
     def Load(self):
         def w(n):
             return self.W * n / 100
@@ -556,10 +554,10 @@ class NaverShow(Show.Show):
             return self.H * n / 100
 
         self.fontTitleH = self.H // 16
-        self.fontTitle = pygame.font.Font('NanumSquare_acB.ttf', self.fontTitleH)
+        self.fontTitle = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontTitleH)
         
         self.fontListH = self.H // 24
-        self.fontList = pygame.font.Font('NanumSquare_acB.ttf', self.fontListH)
+        self.fontList = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontListH)
         self.highRankX = 0
         self.lowRankX = 0.5
         self.animateProgress = 0
@@ -571,31 +569,31 @@ class NaverShow(Show.Show):
             return self.W * n / 100
         def h(n):
             return self.H * n / 100
-
-        if self.stop < 0:
-            if self.animateType == 'left':
-                self.animateProgress -= dt * ((self.animateProgress ** 2) * 5 + 0.6)
-                if self.animateProgress < 0:
-                    self.animateProgress = 0
-                    self.animateType = 'right'
-                    self.stop = self.stop_time
-            elif self.animateType == 'right':
-                self.animateProgress += dt * (((1 - self.animateProgress) ** 2) * 5 + 0.6)
-                if self.animateProgress > 1:
-                    self.animateProgress = 1
-                    self.animateType = 'left'
-                    self.stop = self.stop_time
-        else:
-            self.stop -= dt
-                
-        self.highRankX = (self.animateProgress ** 2) - 1
-        self.lowRankX = (self.animateProgress ** 2)
         
         self.surf.fill((1, 1, 1))
-        
-        y = (self.H - (self.fontListH * 1.6 * 10 + self.fontTitleH * 3)) / 2
-        
         if not self.isEmpty:
+            if self.stop < 0:
+                if self.animateType == 'left':
+                    self.animateProgress -= dt * ((self.animateProgress ** 2) * 5 + 0.6)
+                    if self.animateProgress < 0:
+                        self.animateProgress = 0
+                        self.animateType = 'right'
+                        self.stop = self.stop_time
+                elif self.animateType == 'right':
+                    self.animateProgress += dt * (((1 - self.animateProgress) ** 2) * 5 + 0.6)
+                    if self.animateProgress > 1:
+                        self.animateProgress = 1
+                        self.animateType = 'left'
+                        self.stop = self.stop_time
+            else:
+                self.stop -= dt
+                
+            self.highRankX = (self.animateProgress ** 2) - 1
+            self.lowRankX = (self.animateProgress ** 2)
+        
+        
+            y = (self.H - (self.fontListH * 1.6 * 10 + self.fontTitleH * 3)) / 2
+        
             text = self.fontTitle.render('실시간 급상승 검색어',  True, (255, 255, 255))
             self.surf.blit(text, (w(50) - text.get_width() // 2, y))
             y += self.fontTitleH * 3
@@ -636,8 +634,6 @@ class WatchShow(Show.Show):
     period = datetime.timedelta(hours=0, minutes=0, seconds=0,microseconds=500000)
     img = {}
     _class = mod_classinfo
-    target_grade = 2
-    target_class = 3
     mutex = mutex
     target_hour = 0
 
@@ -648,9 +644,9 @@ class WatchShow(Show.Show):
             return self.H * n / 100
 
         self.fontTitleH = self.H // 18
-        self.fontTitle = pygame.font.Font('NanumSquare_acB.ttf', self.fontTitleH)
+        self.fontTitle = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontTitleH)
         self.fontDescH = self.H // 30
-        self.fontDesc = pygame.font.Font('NanumSquare_acB.ttf', self.fontDescH)
+        self.fontDesc = pygame.font.Font(sys.path[0]+'/NanumSquare_acB.ttf', self.fontDescH)
         
     def Render(self, dt):
         def w(n):
@@ -709,10 +705,10 @@ class WatchShow(Show.Show):
         
 pygame.init()
 pygame.mixer.init()
-WND_W = 90 * 6
-WND_H = 160 * 6
-surf = pygame.display.set_mode((WND_W, WND_H))
-
+WND_W = 768 // 2
+WND_H = 1366 // 2
+surf = pygame.display.set_mode((WND_W, WND_H), pygame.FULLSCREEN if False else 0)
+       
 SHOWS = {}
 SHOWS[0] = WeatherShow(WND_W, WND_H)
 SHOWS[1] = MealShow(WND_W, WND_H)
@@ -721,11 +717,17 @@ SHOWS[3] = TimeTableShow(WND_W, WND_H)
 SHOWS[4] = ClockShow(WND_W, WND_H)
 SHOWS[5] = NaverShow(WND_W, WND_H)
 SHOWS[6] = WatchShow(WND_W, WND_H)
+for _ in range(len(SHOWS)):
+    while SHOWS[_].isEmpty: time.sleep(0.1)
+    SHOWS[_].isPause = True
+SHOWS[0].isPause = False
+SHOWS[1].isPause = False
 
 class ManagerShow(Show.Show):
     show_name = 'Manager show'
     period = datetime.timedelta(hours=0, minutes=0, seconds=3)
     mutex = mutex
+    draw_mutex = draw_mutex
     img = {}
     num_of_show = len(SHOWS)
 
@@ -735,7 +737,7 @@ class ManagerShow(Show.Show):
         def h(n):
             return self.H * n / 100
 
-        self.ShowA = 5
+        self.ShowA = 0
         self.ShowB = 1
         self.ShowAAlpha = 1
         self.ShowBAlpha = 0
@@ -743,40 +745,64 @@ class ManagerShow(Show.Show):
 
     def Render(self, dt):
         now = datetime.datetime.now()
+        #print(5)
 
-        if now.second >= 57 and (now.minute == 59 or False) :
+        if now.second >= 57 and (now.minute == 59) :
             if self.ShowA != 6 and self.ShowB != 6:
+                #print(7)
+                draw_mutex.acquire()
                 SHOWS[6].target_hour = now.hour + 1
+                SHOWS[self.ShowB].isPause = True
                 self.ShowB = self.ShowA
                 self.ShowBAlpha = 1
                 self.ShowA = 6
+                SHOWS[self.ShowA].isPause = False
                 self.ShowAAlpha = 0
                 self.AnimateProgress = 0
-                pygame.mixer.music.load('beep.mp3')
+                pygame.mixer.music.load(sys.path[0]+'/beep.mp3')
+                pygame.mixer.music.set_volume(0.2)
                 pygame.mixer.music.play()
+                draw_mutex.release()
+                #print(77)
         elif self.ShowA == 6 and now.second >= 1 and now.second < 57:
+            #print(8)
+            draw_mutex.acquire()
+            SHOWS[self.ShowB].isPause = True
             self.ShowB = self.ShowA
             self.ShowBAlpha = 1
             self.ShowA = 0
+            SHOWS[self.ShowA].isPause = False
             self.ShowAAlpha = 0
             self.AnimateProgress = 0
-            self.last_refresh = now
+            #self.last_refresh = now
+            draw_mutex.release()
+            #print(88)
         elif now - self.last_refresh > self.period:
+            #print(9)
+            draw_mutex.acquire()
+            #print('find new slide')
+            SHOWS[self.ShowB].isPause = True
             self.ShowB = self.ShowA
             self.ShowBAlpha = 1
+            #print('find start')
+            
             target = (self.ShowB + 1) % self.num_of_show
             while target == 6: target = (target + 1) % self.num_of_show
             mutex.acquire()
             print(target)
             mutex.release()
             self.ShowA = target
+            SHOWS[self.ShowA].isPause = True
             self.ShowAAlpha = 0
             self.AnimateProgress = 0
             self.last_refresh = now
-            
+            draw_mutex.release()
+        
+        #print('55')
     def Refresh(self):
         try:
-            self.isEmpty = False
+            #self.isEmpty = False
+            pass
         except Exception as e:
             print(e)
             print('%s %s'%(str(datetime.datetime.now()), str(e)))
@@ -808,15 +834,17 @@ while loop:
     for e in pygame.event.get():
         if e.type == pygame.locals.QUIT:
             loop = False
+        elif e.type == pygame.locals.KEYDOWN:
+            if e.key == pygame.locals.K_a:
+                loop = False
 
     surf.fill((0, 0, 0))
     #pygame.draw.rect(surf, FORE_COLOR, ((w(100) - w(70)) / 2, (h(100) - w(70)) / 2, w(70), w(70)))
     
-    draw_mutex.acquire()
-
     SHOW_MNG.Render(dt)
-
+    #print(6)
     if now.hour < 23 and now.hour > 6:
+        draw_mutex.acquire()
         if SHOW_MNG.ShowBAlpha > 0:
             s = SHOWS[SHOW_MNG.ShowB].Render(dt)
             s.set_alpha(int(255 * SHOW_MNG.ShowBAlpha))
@@ -835,8 +863,8 @@ while loop:
             s.set_alpha(int(255 * SHOW_MNG.ShowAAlpha))
             surf.blit(s, (0, 0))
 
-    draw_mutex.release()
-    
+        draw_mutex.release()
+    #print(66)
     pygame.display.flip()
 
 for _ in SHOWS:
